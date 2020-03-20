@@ -7,5 +7,7 @@ urlpatterns = [
     path('', views.principal, name = 'vehiculo'),
     path('registrarVehiculo/', views.registrarVehiculo),
     path('verVehiculo/', views.verVehiculo),
+    path('agregarHorario/', views.agregarHorario),
+    path('verHorario/', views.verHorario),
     
 ]

@@ -1,0 +1,120 @@
+{% extends 'principal.html' %}
+{% block body%}
+<script>
+    $(document).change(function(event) { 
+      var num1 = $('#hora_recogida').val();
+         
+         $('#hora_devolucion').val(num1);
+
+
+         
+         var fechaI = new Date($('#fecha_recogida').val());
+        var fechaF = new Date($('#fecha_devolucion').val());
+
+        var difM = fechaF - fechaI // diferencia en milisegundos
+        var difD = difM / (1000 * 60 * 60 * 24) // diferencia en dias
+
+        
+
+        console.log(difD)
+        $('#dias').val(difD);
+        
+
+        '{% for c in v%}'
+     var ve = '{{c.tipo_vehiculo}}';
+     if (ve == 'camioneta'){
+
+         var t = difD * 80;
+         $('#precio_total').val(t);
+
+     }
+     if (ve == 'auto'){
+
+var t = difD * 60;
+$('#precio_total').val(t);
+
+} 
+if (ve == 'furgoneta'){
+
+var t = difD * 100;
+$('#precio_total').val(t);
+
+}  
+     if(difD <= 0 ){
+            $('#precio_total').val("Fecha de devocluion no puede ser mayor a la de recogida");
+        }
+
+           
+     
+            
+        
+
+        '{% endfor%}'
+       
+     });
+
+
+    
+</script>
+<div class="container section small-padding">
+    <div class="messages" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="{{ message.tags }}">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    <div class="form-group" style="width:800px; margin:0 auto; height: 60px"  >
+       
+        <ul class="messages">
+           
+            <li>
+                <div class="alert alert-warning">Precio por dia: Auto: $60, Camioneta: $80, Furgoneta: $100.</div>
+            </li>
+           
+        </ul>
+      
+    </div>
+    <form id="register-form" class="login" method="POST">{%csrf_token%}
+        <div class="field-wrap">
+            
+            <div>
+                <input type="hidden" name="external" id="external" value="0" />
+
+                
+                <label for="">Fecha de Recogida</label>
+                <input type="date" name="fecha_recogida" id="fecha_recogida" />
+                <label for="">Hora de Recogida</label>
+                <input type="time" name="hora_recogida" id="hora_recogida" />
+                <label for="">Fecha de Devolucion</label>
+                <input type="date" name="fecha_devolucion" id="fecha_devolucion" />
+                
+                <label for="">Dias disponibles</label>
+                <input type="text" name="dias" id="dias" readonly/>
+                <div class="form-group">
+                    <label for="">Precio Total a pagar</label>
+                <input type="text" placeholder="$$" readonly name="precio_total"  id="precio_total" class="login__input" required />
+                  </div>
+               
+            </div>
+        </div>
+</div>
+
+</div>
+
+
+
+
+
+<div class="form" style="text-align: right">
+    <br>
+    <a type='' id="reg" href="/" class="btn btn-danger" value="">Cancelar</a>
+    <button type='submit' id="reg" class="btn btn-success" value="submit">Registrarse</button>
+</div>
+</form>
+</div>
+{% endblock%}

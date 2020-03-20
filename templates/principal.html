@@ -1,4 +1,5 @@
 {% load  staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,7 +105,7 @@
 						<li class="active">
 							<a href="/">Inicio </a>
 						</li>
-						{% if request.user.is_authenticated %}
+						{% if request.user.is_authenticated%}
 						<li class="dropdown">
 							<a href="/registrarVehiculo">Registrar vehiculo</a>
 							<ul class="dropdown-menu">
@@ -119,13 +120,23 @@
 								<!--<li><a href="/cartelera/lista_horarios">Lista de cartelera</a></li>--> 
 							</ul>
 						</li>
+						<li class="dropdown">
+							<a href="/verHorario">Ver Horarios</a>
+							<ul class="dropdown-menu">
+								
+								<!--<li><a href="/cartelera/lista_horarios">Lista de cartelera</a></li>--> 
+							</ul>
+						</li>
 						{% endif %}
+						{% if request.user.is_authenticated %}
 						
+						{% else %}
 						<li class="dropdown">
 							<a href="/accounts/login">
 								<i data-toggle="modal" data-target="">Iniciar sesion</i>
 							</a>
 						</li>
+						{% endif %}
 						
 						{% if request.user.is_authenticated %}
 						<li class="dropdown">
@@ -218,6 +229,17 @@
 
 		<div class="container section">
 			<div class="row">
+				<div class="messages" >
+					{% if messages %}
+					<ul class="messages">
+						{% for message in messages %}
+						<li>
+							<div class="{{ message.tags }}">{{ message }}</div>
+						</li>
+						{% endfor %}
+					</ul>
+					{% endif%}
+				</div>
 				<div class="col-md-12 search">
 					<form method="GET" action="/">
 						<div id="custom=search=input">
@@ -248,37 +270,76 @@
 							<li><a href="#sun">Sun</a></li>
 						</ul>-->
 						<div id="mon">
-								{% for c in listaB%}
+								{% for c in lh%}
 							<div class="row movie-tabs">
-								<div class="col-md-2 col-sm-3">
-									<a href="">
-										<img src="{{c.pelicula.imagen.url}}" alt="Movie title" />
+								<div class="col-md-5">
+									<a href="/alquilarVehiculo?id={{c.horarioA_id}} ">
+										<img src="{{c.vehiculo.imagen.url}}" alt="Movie title" />
 									</a>
 								</div>
 								<table style="width:100%">
 									<tr>
 								<div class="col-md-10 col-sm-9">
-									<span class="title">{{c.pelicula.genero}}</span>
-									<h3 class="no-underline">{{c.pelicula.nombre_pelicula}}</h3>
+									<span class="title">{{c.vehiculo.marca}}</span>
+									<h3 class="no-underline">{{c.vehiculo.modelo}}</h3>
 									<p></p>
-									<p>{{c.sinopsis}}</p>
+									<p>{{c.vehiculo.marca}}</p>
 									<div class="row">
 										<div class="col-md-8 col-sm-9">
 											<hr class="space-10" />
 											<span class="viewing-times">
 												<i class="material-icons">access_time</i>
-												Horarios
+												Fecha Recogida: {{c.fecha_recogida}} 
 											</span>
-											{% if request.user.is_authenticated %}
-											<a href="/adquirirBoleto?id={{c.horario_id}} " class="time past">{{c.hora_pelicula}}</a>
-											{% else %}
-											<a href="/accounts/login" class="time past">{{c.hora_pelicula}}</a>
-											{% endif %}
 
 										</div>
-										<div class="col-md-4 col-sm-3 running-time">
-											<hr class="space-10" />
-											{{c.pelicula.duracion}} min.  Sala<span class="certificate">{{c.sala.nombre_sala}}</span>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												Fecha Devolucion: {{c.fecha_devolucion}}
+											</span>
+
+										</div>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												Transmision: {{c.vehiculo.transmision}}
+											</span>
+
+										</div>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												Numero de puertas: {{c.vehiculo.nro_puertas}}
+											</span>
+
+										</div>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												NUmero de asientos: {{c.vehiculo.nro_asientos}}
+											</span>
+
+										</div>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												Aire acondicionado: {{c.vehiculo.aire_acondicionado }}
+											</span>
+
+										</div>
+										<div class="col-md-8 col-sm-9">
+											
+											<span class="viewing-times">
+												<i class="material-icons">access_time</i>
+												Precio Total: {{c.precio_total}}
+											</span>
+
 										</div>
 									</div>
 								</div>

@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('apps.vehiculo.urls')),
     path('accounts/login/', include('apps.login.urls')),
     path('logout/', include('apps.logout.urls')),
+    path('alquilarVehiculo/', include('apps.alquiler.urls')),
 ]
 
 #PARA IMAGENES

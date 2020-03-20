@@ -1,0 +1,52 @@
+{% extends 'principal.html' %}
+{% block body%}
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="srylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+ <script>
+        var nc = $.noConflict(true);
+    nc(document).ready( function () {
+    nc('#tpelicula').DataTable();
+} );
+</script>
+
+
+<div class="container">
+   
+    <h1>Horarios de Funcion</h1>
+    <div class="form-group" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="{{ message.tags }}">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    <div >
+        <a href="/verVehiculo" class="btn btn-info " style="float: right;">
+            <span class="glyphicon glyphicon-plus" ></span>Agregar Vehiculo a Alquiler 
+          </a>
+    </div>
+    <table class="table table-striped" id="tpelicula">
+        <thead>
+            <tr>
+                <th>Fecha de recogida </th>
+                <th>Hora de recogida</th>
+                <th>Fecha de devolcuion</th>
+                <th>Precio Total</th>
+            </tr>
+            </thead>
+            {% for c in h%}
+            <tr>
+                <th>{{c.fecha_recogida}} </th>
+                <th>{{c.hora_recogida}}</th>
+                <th>{{c.fecha_devolucion}}</th>
+                <th>{{c.precio_total}}</th>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+{% endblock%}
