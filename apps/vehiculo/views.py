@@ -39,6 +39,8 @@ def registrarVehiculo(request):
                 vehiculo.imagen = datos.get('imagen')
                 vehiculo.save()
                 messages.success(request, 'Vehiculo registrado correctamente')
+                return redirect('/verVehiculo')
+                
                 
             else:
                 messages.error(request, 'Vehiculo con la placa ya registrado')
