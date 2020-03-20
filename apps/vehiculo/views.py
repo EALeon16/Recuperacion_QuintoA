@@ -6,6 +6,10 @@ from django.contrib import messages
 from .forms import FormularioVehiculo, FormularioHorario
 from apps.vehiculo.models import Vehiculo,HorarioA
 import datetime
+from django.db.models import Q
+
+from django.contrib.auth.decorators import login_required
+
 
 def principal(request):
     listaHorario = HorarioA.objects.all()
@@ -13,8 +17,9 @@ def principal(request):
         'lh': listaHorario,
     }
     
+    
     return render(request,'principal.html', context)
-
+@login_required
 def registrarVehiculo(request):
     usuario = request.user#peticion que es procesada x el frmawor agrega el usuario
     if usuario.groups.filter(name = 'administrador').exists():
@@ -49,14 +54,19 @@ def registrarVehiculo(request):
     return render(request,'vehiculo/registrar_vehiculo.html', context)
 
 
-
+@login_required
 def verVehiculo(request):
-    lista = Vehiculo.objects.all()
+    usuario = request.user
+    if usuario.groups.filter(name = 'administrador').exists():
+        lista = Vehiculo.objects.all()
+    else:
+        messages.warning(request, 'No tienes acceso a estas funciones')
+        return redirect('/')    
     context={
         'l': lista,
     }
     return render(request,'vehiculo/ver_vehiculo.html', context) 
-
+@login_required
 def agregarHorario(request):
     placaA = request.GET.get('dato')
     now = datetime.date.today()
@@ -83,9 +93,15 @@ def agregarHorario(request):
     }
  
     return render(request,'vehiculo/agregar_alquiler.html', context)
-
+@login_required
 def verHorario(request):
-    listaH = HorarioA.objects.all()
+    usuario = request.user#peticion que es procesada x el frmawor agrega el usuario
+    if usuario.groups.filter(name = 'administrador').exists():
+        listaH = HorarioA.objects.all()
+    else:
+        messages.warning(request, 'No tienes acceso a estas funciones')
+        return redirect('/')
+
     context={
         'h':listaH,
     }

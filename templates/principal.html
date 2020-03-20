@@ -107,26 +107,14 @@
 						</li>
 						{% if request.user.is_authenticated%}
 						<li class="dropdown">
-							<a href="/registrarVehiculo">Registrar vehiculo</a>
+							<a >Vehiculos</a>
 							<ul class="dropdown-menu">
-								
-								<!--<li><a href="/cartelera/lista_horarios">Lista de cartelera</a></li>--> 
+								<li>	<a href="/registrarVehiculo">Registrar vehiculo</a></li>
+								<li><a href="/verVehiculo">Ver Vehiculos</a></li>
+								<li><a href="/verHorario">Ver Vehiculos disponibles</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a href="/verVehiculo">Ver vehiculos</a>
-							<ul class="dropdown-menu">
-								
-								<!--<li><a href="/cartelera/lista_horarios">Lista de cartelera</a></li>--> 
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="/verHorario">Ver Horarios</a>
-							<ul class="dropdown-menu">
-								
-								<!--<li><a href="/cartelera/lista_horarios">Lista de cartelera</a></li>--> 
-							</ul>
-						</li>
+						
 						<li class="dropdown">
 							<a href="/alquilarVehiculo/getAll">Lista de Alquileres</a>
 							<ul class="dropdown-menu">
@@ -248,7 +236,7 @@
 					{% endif%}
 				</div>
 				<div class="col-md-12 search">
-					<form method="GET" action="/">
+				<!---	<form method="GET" action="/">
 						<div id="custom=search=input">
 							<div class="input-group" col-md-12>
 								<input type="text" id="datepicker" name="datepicker">
@@ -259,7 +247,8 @@
 							</div>
 						</div>
 					</form>
-				<!--	<h2>{% now "SHORT_DATETIME_FORMAT" %}</h2>-->
+					<h2>{% now "SHORT_DATETIME_FORMAT" %}</h2>-->
+			
 					
 				</div>
 		<div class="container section">

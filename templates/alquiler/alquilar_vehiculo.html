@@ -228,7 +228,7 @@ function toSingle(digit){
           
  
           <form id="register-form" class="login" method="POST" >{% csrf_token %}
-            <!---
+            
            
             <div class="col-md-4" id='contenedorS'>
               <p>
@@ -251,43 +251,29 @@ function toSingle(digit){
             </p>
             <div id="funka" hidden>
               <div class="form-group">
-                <label for="nombres">Cantidad de boletos (TARIFA NORMAL)</label>
-              <input type="number" min="0"  value="0" placeholder="ingrese tarjeta de credito correcta" name="cantidad_boletoN" id="cantidad_boletoN" class="monto" required />
+                <label for="">Busque la cedula del usuario(en caso de que este registrado)</label>
+                <select class="myS" name="persona">
+                 <option value="">Busque por cedula</option>
+                 {% for c in p%}
+                 <option value="{{c.persona_id}}">{{c.cedula}}</option>
+               
+                 {% endfor %}
+                
+                </select>
+
               </div>
-              <div class="form-group">
-                <label for="nombres">Cantidad de boletos (TARIFA ESPECIAL 50%)</label>
-            <input type="number" min="0" value="0"  placeholder="ingrese tarjeta de credito correcta" name="cantidad_boletoE" id="cantidad_boletoE" class="monto" required />
-              </div>
-              <div class="form-group">
-                <label for="">Cantidad Total de boletos</label>
-                <input type="text" placeholder="Asientos totales" name="total_boleto" readonly id="total_boleto" class="login__input" required /> 
-              </div>
-              <div class="form-group">
-                <label for="">Precio Total a pagar</label>
-            <input type="text" placeholder="Asientos totales" readonly name="precio_total"  id="precio_total" class="login__input" required />
-              </div>
-              <a type='' id="reg" href="/" class="btn btn-danger" value="">Cancelar</a>
-                  <button type='submit' id="reg" class="btn btn-success" value="submit">Comprar Boleto</button>>
+              
+                <label for="">Hora de recogida</label>
+                <input type="time" name="hora_recogida" id="hora_recogida" />
+                <button type='submit' id="reg" class="btn btn-success" value="submit">Alquilar Vehiculo</button>
                 </div>
                 </div>
          
                 </div>
               </div>
-              -->
               
-              <label for="">Busque la cedula del usuario(en caso de que este registrado)</label>
-               <select class="myS" name="persona">
-                <option value="">-------Eliga una opcion--------</option>
-                {% for c in p%}
-                <option value="{{c.persona_id}}">{{c.cedula}}</option>
               
-                {% endfor %}
-               
-               </select>
-               <label for="">Fecha de Alquiler</label>
-                <label for="">Hora de recogida</label>
-                <input type="time" name="hora_recogida" id="hora_recogida" />
-                <button type='submit' id="reg" class="btn btn-success" value="submit">Alquilar Vehiculo</button>
+              
                 
               
           </form>

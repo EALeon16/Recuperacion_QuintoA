@@ -33,17 +33,19 @@
     <table class="table table-striped" id="tpelicula">
         <thead>
             <tr>
+                <th>Placa del vehiculo </th>
                 <th>Fecha de recogida </th>
-                <th>Hora de recogida</th>
                 <th>Fecha de devolcuion</th>
+                <th>Dias disponibles para uso</th>
                 <th>Precio Total</th>
             </tr>
             </thead>
             {% for c in h%}
             <tr>
+                <th>{{c.vehiculo.placa}} </th>
                 <th>{{c.fecha_recogida}} </th>
-                <th>{{c.hora_recogida}}</th>
                 <th>{{c.fecha_devolucion}}</th>
+                <th>{{c.dias}}</th>
                 <th>{{c.precio_total}}</th>
                 </tr>
             {% endfor %}
