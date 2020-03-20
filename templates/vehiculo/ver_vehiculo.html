@@ -35,8 +35,8 @@
         </ul>
         {% endif%}
     </div>
-    <a href="/registrar_pelicula" class="btn btn-info " style="float: right;">
-        <span class="glyphicon glyphicon-plus" ></span>Agregar Pelicula 
+    <a href="/registrarVehiculo" class="btn btn-info " style="float: right;">
+        <span class="glyphicon glyphicon-plus" ></span>Agregar Vehiculo 
       </a>
     <table class="table table-striped" id="tpelicula">
         <thead>
@@ -53,15 +53,14 @@
             </thead>
             {% for c in l%}
             <tr>
-                <th><a href="/cartelera/agregar_horarios?peli={{c.pelicula_id}}">{{c.placa}}</a></th>
+                <th><a href="/agregar_alquiler?placa={{c.placa}}">{{c.placa}}</a></th>
                 <th>{{c.marca}}</th>
                 <th>{{c.modelo}}</th>
                 <th>{{c.transmision}}</th>
                 <th>{{c.nro_puertas}}</th>
                 <th>{{c.nro_asientos}}</th>
-                <th>{{c.director}}</th>
-                <th>{{c.protagonistas}}</th>
-                <th>{{c.proyeccion}}</th>
+                <th>{{c.tipo_vehiculo}}</th>
+                <th>{{c.aire_acondicionado}}</th>
              <!----   <th><a href="/editar_pelicula?nombre_pelicula={{c.nombre_pelicula}}">editar</a></th>-->
                 
             </tr>
