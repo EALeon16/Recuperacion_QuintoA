@@ -1,0 +1,125 @@
+{% extends 'principal.html' %}
+{% block body%}
+
+
+<!-- Main content -->
+    <script type="text/javascript">
+    
+    //funcion que nos permite calcular la edad a partir de la fecha de nacimiento
+    $(document).ready(function () {
+        $("#fechaNacimiento").change(function () {  //  funcion que se ejecuta al momento que el valor de la fecha de naciemiento cambia
+            var edad = calcularEdad($("#fechaNacimiento").val());
+           
+
+           
+            if (edad < 18){
+                var ver =  $("#edad").val("Debes ser mayor de edad");
+            }else{
+                var ver =  $("#edad").val(edad);
+            }
+        })
+
+        $(function () {
+       
+       $.validator.addMethod("cedula", function (value, element) {
+           return this.optional(element) || validarCedula(value);
+       }, "Cedula no valida");
+       $("#register-form").validate({
+           rules: {
+               cedula: {
+                   cedula: true,
+                   required: true
+               },
+               direccion: {
+                   required: true
+               },
+               edad: {
+                   required: true
+               },
+               rol: {
+                   required: true
+               }
+           }
+       });
+   })
+
+    });
+    
+
+    
+</script>
+
+
+<div class="container section small-padding">
+    <div class="messages" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="{{ message.tags }}">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    <form id="register-form" class="login" method="POST" >{% csrf_token %}
+            <h1>Registrarse</h1>
+            <div>
+                <label for="nombres">Ingrese su cedula</label>
+                <input type="text" placeholder="Cedula" name="cedula" id="cedula" pattern="[0-9]+" required/>
+            </div><br>
+            <div>
+                <label for="nombres">Ingrese sus nombres</label>
+                <input type="text" placeholder="Nombres" name="first_name" id="first_name"   required />
+            </div><br>
+            <div>
+                <label for="">Ingrese sus apellidos</label>
+                <input type="text" placeholder="Apellidos" name="last_name"   id="last_name" required/>
+            </div><br>
+            <div>
+                <label for="">Ingrese su Nombre de Usuario</label>
+                <input type="text" placeholder="Nombre de Usuario" name="username" id="username"   required/>
+            </div><br>
+            <div>
+                <label for="">Ingrese su fecha de nacimiento</label>
+                <input type="date" placeholder="Fecha de nacimiento" name="fechaNacimiento" id="fechaNacimiento"
+                    class="login__input" required />
+            </div><br>
+            <div>
+                <label for="">Edad</label>
+                <input type="text" placeholder="Edad" name="edad" id="edad" class="login__input" readonly />
+            </div><br>
+            <div>
+                <label for="">Direccion</label>
+                <input type="text" placeholder="Direccion" name="direccion" id="direccion" class="login__input"  />
+            </div><br>
+            <div>
+                <label for="">Ingrese su correo electronico</label>
+                <input type="email" placeholder="Email" name="email" id="email" />
+            </div><br>
+            <div>
+                <label for="">Ingrese su contraseña</label>
+                <input type="password" placeholder="Contraseña" name="password" id="password" required />
+            </div>
+            <select name="rol" id="rol" hidden>
+                    
+                
+                {% for c in listaR%}
+                <option value="{{c.rol_id}}">{{c.nombre}}</option>
+
+                {% endfor %}
+                </option>
+            </select>
+
+        </div>
+
+        
+        <div class="form" style="text-align: right">
+            <br>
+            <a type='' id="reg" href="/" class="btn btn-danger" value="">Cancelar</a>
+            <button type='submit' id="reg" class="btn btn-success" value="submit">Registrarse</button>
+        </div>    
+    </form>
+
+</div>
+{% endblock %}

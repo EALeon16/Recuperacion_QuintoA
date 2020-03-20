@@ -1,0 +1,107 @@
+{% extends 'principal.html' %}
+{% block body%}
+<div class="container section news">
+    <div class="form-group" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="alert alert-success">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            
+            <h2>Informacion de mi perfil</h2>
+            <div class="row">
+                {% for c in perfil%}
+                    <div class="col-sm-5">
+                        <div class="tabs">
+                            <div>
+                                <div class="field-wrap">
+                                    <label for="nombres">Nombres</label>
+                                    <input type="text" placeholder="Nombres" name="nombres" id="nombres"
+                                        class="login__input" value="{{c.first_name}}" readonly />
+                                </div><br>
+                                <div>
+                                    <label for="">Apellidos</label>
+                                    <input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"
+                                        class="login__input" value="{{c.last_name}}" readonly />
+                                </div><br>
+                                <div>
+                                    <label for="">Cedula de identidad</label>
+                                    <input type="text" placeholder="CI" name="cedula" id="cedula" class="login__input"
+                                        value="{{c.cedula}}" readonly />
+                                </div><br>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5 col-sm-push-2">
+                        <div class="tabs ">
+                            <div>
+                                <div>
+                                    <label for="">Nombre de Usuario</label>
+                                    <input type="text" placeholder="Edad" name="edad" id="edad" class="login__input"
+                                        value="{{c.username}}" readonly />
+                                </div><br>
+                                <div>
+                                    <label for="">Edad</label>
+                                    <input type="text" placeholder="Edad" name="edad" id="edad" class="login__input"
+                                        value="{{c.edad}}" readonly />
+                                </div><br>
+                                <div>
+                                    <label for="">Direccion</label>
+                                    <input type="text" placeholder="Edad" name="edad" id="edad" class="login__input"
+                                        value="{{c.direccion}}" readonly />
+                                </div><br>
+                                <div>
+                                    <label for="">Correo electronico</label>
+                                    <input type="email" placeholder="Email" name="email" id="email"
+                                        value="{{c.email}}" readonly/>
+                                </div><br>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<!--- MODAL -->
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">Editar</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- .................................form.............................. -->
+                <form id="f_editar" method="POST" >{%csrf_token%}
+                    <input type="hidden" name="external" value="0" />
+                    <div class="form-group">
+                        {{f}}
+                    </div>
+                    
+                    <div style="text-align: center">
+                        <button type="submit" class="btn btn-success" value="submit">Ingresar</button>
+                        <span></span>
+                        <button type="reset" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

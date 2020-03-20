@@ -1,0 +1,90 @@
+{% extends 'principal.html' %}
+{% block body%}
+
+    <!-- Main content -->
+    <div class="container section small-padding">
+            <div class="form-group" >
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>
+                            <div class="{{ message.tags }}">{{ message }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif%}
+                </div>
+        <form id="register-form" class="login" method="POST" enctype="multipart/form-data">{%csrf_token%}
+
+
+
+            <div class="field-wrap">
+                <input type="hidden" value="0" id="external" name="external" />
+                <div>
+                    <label for="nombre">Placa</label>
+                    <input type="text" placeholder="Numero de placa" name="placa" id="placa"
+                        class="login__input" />
+                </div><br>
+                <div>
+                    <label for="">Marca</label>
+                    <input type="text" placeholder="Tipo de combustible" name="marca"
+                        id="marca" data-role="tagsinput" />
+                </div><br>
+                <div>
+                    <label for="">Modelo</label>
+                    <input type="text" placeholder="Tipo de combustible" name="modelo"
+                        id="modelo" data-role="tagsinput" />
+                </div><br>
+                <div>
+                    <label for="">Numero de puertas</label>
+                    <input type="text"  placeholder="Numero de puertas" id="puertas"
+                        name="puertas">
+                </div><br>
+                <div>
+                    <label for="">Asientos disponibles</label>
+                    <input type="text" placeholder="Numero de aientops disponibles" name="asientos" id="asientos"
+                        data-role="tagsinput" value="" />
+                </div><br>
+                <div>
+                    <label for="">Aire condiconado</label>
+                    <select name="proyeccion" id="proyeccion">
+                        <option value="">-------Eliga una opcion--------</option>
+
+                        <option value="si">SI</option>
+                        <option value="no">NO
+                        </option>
+                    </select>
+                </div><br>
+                <div>
+                    <label for="">Transmision</label>
+                    <select name="proyeccion" id="proyeccion">
+                        <option value="">-------Eliga una opcion--------</option>
+
+                        <option value="si">SI</option>
+                        <option value="no">NO
+                        </option>
+                    </select>
+                </div><br>
+            <div>
+                <label for="">Combustible</label>
+                <input type="text" placeholder="Tipo de combustible" name="combustible"
+                    id="combustible" data-role="tagsinput" />
+            </div><br>
+
+
+                <div>
+                <label for="">Imagen</label>
+                <input type="file" class="btn-lg btn-link " name="imagen" id="foto">
+            </div><br>
+            </div>
+
+            <div class="form" style="text-align: right">
+                <br>
+                <a href="/peliculas" class="btn btn-danger">Cancelar</a>
+                <button type='submit' id="reg" class="btn btn-success" value="submit">Registrar pelicula</button>
+            </div><br>
+        </form>
+
+    </div>
+
+{% endblock%}

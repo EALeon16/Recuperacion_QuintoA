@@ -1,0 +1,72 @@
+{% extends 'principal.html' %}
+{% block body%}
+<link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="srylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+ <script>
+        var nc = $.noConflict(true);
+    nc(document).ready( function () {
+    nc('#tpelicula').DataTable();
+} );
+</script>
+
+
+<div class="container">
+    <div class="messages" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="{{ message.tags }}">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+    <h1>Historial de Compras</h1>
+    <div class="form-group" style="width:800px; margin:0 auto; height: 60px"  >
+       
+        <ul class="messages">
+           
+            <li>
+                <div class="alert alert-warning">Descargar el codigo QR desde la app de tu celular para ingresar a la funcion </div>
+            </li>
+           
+        </ul>
+      
+    </div>
+    <table class="table table-striped" id="tpelicula">
+        <thead>
+            <tr>
+                <th>Nro. Boletos Comprados (Tarifa Normal)</th>
+                <th>Nro. Boletos Comprados (Tarifa Especial)</th>
+                <th>Nro. Total de Boletos</th>
+                <th>Costo Total</th>
+                
+                <th>Fecha de proyeccion de la pelicula</th>
+                <th>Hora de proyeccion de la pelicula</th>
+                <th>Pelicula</th>
+                <th>Sala</th>
+                <th>Generar PDF</th>
+                
+            </tr>
+            </thead>
+            {% for c in listaBoletos%}
+                <tr>
+                    <th>{{c.cantidad_boletoN}}</th>
+                    <th>{{c.cantidad_boletoE}}</th>
+                    <th>{{c.total_boleto}}</th>
+                    <th>{{c.precio_total}}</th>
+                    <th>{{c.horario.hora_pelicula}}</th>
+                    <th>{{c.horario.fecha_pelicua}}</th>
+                    <th>{{c.horario.pelicula.nombre_pelicula}}</th>
+                    <th>{{c.horario.sala.nombre_sala}}</th>
+                    <th><a href="/pdfBoleto?nro={{c.boleto_id}}" class="btn btn-warning">Comprobante</a></th>
+            {% endfor%}
+            
+                </tr>
+                
+    
+        </table>
+</div>
+{% endblock%}

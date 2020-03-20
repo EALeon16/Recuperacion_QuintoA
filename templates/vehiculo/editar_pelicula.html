@@ -1,0 +1,31 @@
+{% extends 'principal.html' %}
+{% block body%}
+
+    <!-- Main content -->
+    <div class="container section small-padding">
+            <h1>Registro de peliculas</h1>
+         
+        <form id="register-form" class="login" method="POST" >{%csrf_token%}
+
+            <div>
+                <label for="">Estreno</label>
+                <select name="proyeccion" id="proyeccion">
+                    <option value="">-------Eliga una opcion--------</option>
+
+                    <option value="si">SI</option>
+                    <option value="no">NO
+                    </option>
+                </select>
+            </div><br>
+            <div>
+
+            <div class="form" style="text-align: right">
+                <br>
+                <a href="/peliculas" class="btn btn-danger">Cancelar</a>
+                <button type='submit' id="reg" class="btn btn-success" value="submit">Registrar pelicula</button>
+            </div><br>
+        </form>
+
+    </div>
+</div>
+{% endblock%}

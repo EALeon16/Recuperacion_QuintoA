@@ -1,0 +1,122 @@
+
+{% load  staticfiles %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<script>
+   $(document).on('ready', constructor);
+  function constructor(){
+    sumar();
+  }
+
+  function sumar (){
+    '{% for c in listaF%}'
+      var num1 = '{{c.cantidad_boletoN}}'
+      var mult = num1 * 7;
+      $('#total').val(mult)
+      console.log("hola"+mult);
+
+      var num2 = parseInt($('#cantidad_boletoE').val());
+      if(isNaN(num1)){
+        num1 = 0;
+      }
+      if(isNaN(num2)){
+        num2 = 0;
+      }
+      $('#total_boleto').val(num1+num2);
+   '{% endfor %}'
+  }
+</script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PDF COMPROBANTE</title>
+    <link rel="stylesheet" href="{% static 'css/stylePDF.css' %}" media="all" />
+  </head>
+  <body>
+    <div class="container">
+    <header class="clearfix">
+      <div id="logo" >
+        <img src="{% static 'images/logo.svg' %}" alt="Craft Beer HTML Template">
+      </div>
+      <div id="company">
+        <h2 class="name">Movie Star</h2>
+        <div>moviestar@gmil.com</div>
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        {% for c in listaF%}
+        <div id="client">
+          
+          <div class="to">Para:</div>
+          <div class="name">{{c.persona.first_name}} {{c.persona.last_name}}</div>
+          <div class="to">Cedula:</div>
+          <div class="name">{{c.persona.cedula}}</div>
+          <div class="address">Direccion</div>
+          <div class="name">{{c.persona.direccion}}</div>
+          <div class="to">Correo:</div>
+          <div class="email">{{c.persona.email}}</div>
+        </div>
+        {% endfor %}
+        <div id="invoice">
+          <div class="date">Fecha: {{f}}</div>
+        </div>
+      </div>
+      <table >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>DESCRIPCION</th>
+            <th>PRECIO UNITARIO</th>
+            <th>CANTIDAD</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for c in listaF%}
+            <th >01</th>
+            <th >Boletos Normales</th>
+            <th >$7.00</th>
+            <th >{{c.cantidad_boletoN}}</th>
+            <th class="total" name="total" id="total" value="" >${{mul}}</th>
+            {% endfor %}
+          </tr>
+          <tr>
+            {% for c in listaF%}
+            <th>02</th>
+            <th>Boletos Especiales</th>
+            <th >$3.5</th>
+            <th>{{c.cantidad_boletoE}}</th>
+            <th >${{mul2}}</td>
+            {% endfor %}
+          </tr>
+          
+          </tr>
+        </tbody>
+        <tfoot>
+          {% for c in listaF%}
+          <tr>
+            <th ></th>
+            <th ></th>
+            <th ></th>
+            <th > TOTAL</th>
+            <th>${{c.precio_total}}</th>
+          </tr>
+          {% endfor %}
+        </tfoot>
+      </table>
+      <div id="thanks">GRACIAS!</div>
+      
+    </main>
+    <footer>
+      @MOVIESTAR
+    </footer>
+  </div>
+  </body>
+  
+</html>

@@ -1,0 +1,281 @@
+{% extends 'principal.html' %}
+{% block body%}
+<div class="container section small-padding">
+<div class="modal-content">
+    <div id="content_hero" style="background-image: url(images/hero-contact.jpg)">
+      <div class="container">
+        <div class="row blurb scrollme animateme" data-when="exit" data-from="0" data-to="1" data-opacity="0"
+          data-translatey="100">
+          <div class="col-md-9">
+            
+  
+            <h1>Tipos de boletos</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+    /* $(document).keyup('ready', constructor);
+     function constructor(){
+       sumar();
+       mul();
+     }
+
+     function sumar (){
+       $('#contenedorS').on('change', '#cantidad_boletoN', '#cantidad_boletoE', function(){
+         var num1 = parseInt($('#cantidad_boletoN').val());
+         var num2 = parseInt($('#cantidad_boletoE').val());
+         if(isNaN(num1)){
+           num1 = 0;
+         }
+         if(isNaN(num2)){
+           num2 = 0;
+         }
+         $('#total_boleto').val(num1+num2);
+       });
+     }
+
+       function mul (){
+       $('#contenedorS').on('change', '#cantidad_boletoN', '#cantidad_boletoE', function(){
+         var num1 = parseInt($('#cantidad_boletoN').val());
+         var num2 = parseInt($('#cantidad_boletoE').val());
+         if(isNaN(num1)){
+           num1 = 0;
+         }
+         if(isNaN(num2)){
+           num2 = 0;
+         }
+
+         var m1 = num1 * 7;
+         var m2 = num2 * 3.5;
+         $('#precio_total').val(m1+m2);
+       })
+
+      
+
+     }*/
+     $(document).change(function(event) { 
+      var num1 = parseInt($('#cantidad_boletoN').val());
+         var num2 = parseInt($('#cantidad_boletoE').val());
+         if(isNaN(num1)){
+           num1 = 0;
+         }
+         if(isNaN(num2)){
+           num2 = 0;
+         }
+         $('#total_boleto').val(num1+num2);
+       
+     });
+     $(document).change(function(event) { 
+      var num1 = parseInt($('#cantidad_boletoN').val());
+         var num2 = parseInt($('#cantidad_boletoE').val());
+         if(isNaN(num1)){
+           num1 = 0;
+         }
+         if(isNaN(num2)){
+           num2 = 0;
+         }
+
+         var m1 = num1 * 7;
+         var m2 = num2 * 3.5;
+         $('#precio_total').val(m1+m2);
+       
+     });
+
+     $(function(){
+        $("#siguiente").click(function(){
+            $("#form").show();
+        });
+    });
+
+    $(document).keyup(function(event) { 
+  
+  var h = $('#card_number').val(); 
+  console.log(h);
+  var num = $('#card_number').val().toString();
+    var charCount = num.length;
+
+    
+    
+    /* VALIDACION DE TIPO */
+    if(charCount == 1) {   
+        if(num == "4"){
+          console.log("visat" );
+            $("#type").val("VISA");
+        }
+    }
+    if(charCount == 2){
+        if(num == "34" || num == "37"){
+            $("#type").val("AMEX");
+        } else if( num == "51" || num == "55" || num == "53"){
+            $("#type").val("MASTER CARD");
+        } else if( num == "55" ){
+            $("#type").val("DISCOVER");
+        }
+    }
+    if(charCount == 3){
+        if(num == "644"){
+             $("#type").val("DISCOVER")
+        }
+    }
+    if(charCount == 4){
+        if(num == "6011"){
+            $("#type").val("DISCOVER");
+        }
+    }
+    /* !VALIDACION DE TIPO */
+    
+    /* ALGORITMO */
+    if(charCount == 13 || charCount == 14 || charCount == 15 || charCount == 16){
+        var valid = isValid(num, charCount);
+        if(valid){
+            $("#type").val("valida");
+            $("#funka").show();
+           
+            
+            
+        } else {
+            $("#type").val("invalida");
+            
+            
+        }
+    }
+
+
+    
+
+
+    
+    
+  
+
+}); 
+
+
+
+function isValid(ccNum, charCount){
+    var double = true;
+    var numArr = [];
+    var sumTotal = 0;
+    for(i=0; i<charCount; i++){
+        var digit = parseInt(ccNum.charAt(i));
+        
+        if(double){
+            digit = digit * 2;
+            digit = toSingle(digit);
+            double = false;
+        } else {
+            double = true;
+        }
+        numArr.push(digit);
+    }
+    
+    
+    for(i=0; i<numArr.length; i++){
+        sumTotal += numArr[i];
+    }
+    var diff = eval(sumTotal % 10);
+    console.log(diff);
+    console.log(diff == "0");
+    return (diff == "0");
+}
+
+function toSingle(digit){
+    if(digit > 9){
+        var tmp = digit.toString();
+        var d1 = parseInt(tmp.charAt(0));
+        var d2 = parseInt(tmp.charAt(1));
+        return (d1 + d2); 
+    } else {
+        return digit;
+    }
+}
+
+
+
+
+     
+    </script>
+   
+  
+  
+    <div class="container section small-padding">
+      <div class="messages" >
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li>
+                <div class="{{ message.tags }}">{{ message }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif%}
+    </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>Elija los tipos de Boleto que desea adquirir</h2>
+         
+         
+        <h3>Nro de Boletos disponibles :{{disponibles}}</h3>
+  
+             
+              
+         
+        
+        
+          
+ 
+          <form id="register-form" class="login" method="POST" >{% csrf_token %}
+           
+            <div class="col-md-4" id='contenedorS'>
+              <p>
+                <label>Card number</label>
+                <input type="text" placeholder="1234 5678 9012 3456" id="card_number" name = "checkout.cardNumber" >
+                
+              </p>
+              <input id="type" name="type" readonly>
+            <p>
+                <label>Expiry month</label>
+                <input type="text" placeholder="MM" maxlength="5" id="expiry_month">
+            </p>
+            <p>
+                <label>Expiry year</label>
+                <input type="text" placeholder="YYYY" maxlength="5" id="expiry_year">
+            </p>
+            <p>
+                <label>CVV</label>
+                <input type="text" placeholder="123" maxlength="3" id="cvv">
+            </p>
+            <div id="funka" hidden>
+              <div class="form-group">
+                <label for="nombres">Cantidad de boletos (TARIFA NORMAL)</label>
+              <input type="number" min="0"  value="0" placeholder="ingrese tarjeta de credito correcta" name="cantidad_boletoN" id="cantidad_boletoN" class="monto" required />
+              </div>
+              <div class="form-group">
+                <label for="nombres">Cantidad de boletos (TARIFA ESPECIAL 50%)</label>
+            <input type="number" min="0" value="0"  placeholder="ingrese tarjeta de credito correcta" name="cantidad_boletoE" id="cantidad_boletoE" class="monto" required />
+              </div>
+              <div class="form-group">
+                <label for="">Cantidad Total de boletos</label>
+                <input type="text" placeholder="Asientos totales" name="total_boleto" readonly id="total_boleto" class="login__input" required /> 
+              </div>
+              <div class="form-group">
+                <label for="">Precio Total a pagar</label>
+            <input type="text" placeholder="Asientos totales" readonly name="precio_total"  id="precio_total" class="login__input" required />
+              </div>
+              <a type='' id="reg" href="/" class="btn btn-danger" value="">Cancelar</a>
+                  <button type='submit' id="reg" class="btn btn-success" value="submit">Comprar Boleto</button>>
+                </div>
+                </div>
+         
+                </div>
+              </div>
+          </form>
+        
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endblock%}
