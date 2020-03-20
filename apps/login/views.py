@@ -18,11 +18,11 @@ def ingresar(request):
             if user is not None:
                 if user.is_active:
                     login(request,user)
-                    return HttpResponseRedirect(reverse('cine'))
+                    return HttpResponseRedirect(reverse('vehiculo'))
                 else:
                     messages.success(request, 'Usuario desactivado')
             else:
-                messages.success(request, 'Usuario y/o contrasenia incorrecto')
+                messages.error(request, 'Usuario y/o contrasenia incorrecto')
                
             
     else:

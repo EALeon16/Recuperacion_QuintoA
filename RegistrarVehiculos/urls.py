@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.vehiculo.urls')),
     path('accounts/login/', include('apps.login.urls')),
+    path('logout/', include('apps.logout.urls')),
 ]
 
 #PARA IMAGENES

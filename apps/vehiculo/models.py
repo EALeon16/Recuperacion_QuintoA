@@ -25,7 +25,7 @@ class Vehiculo(models.Model):
     transmision = models.CharField(max_length=35, choices = listaT, default= 'Manual', null=False)
     nro_puertas =  models.IntegerField(max_length=10, null=False)
     nro_asientos =  models.IntegerField(max_length=10, null=False)
-    tipo_vehiculo =  models.IntegerField(max_length=50, null=False)
+    tipo_vehiculo =  models.CharField(max_length=50, null=False)
     aire_acondicionado = models.CharField(max_length=15,null=False, choices = AireAcondicionado)
     imagen = models.ImageField(upload_to="portadas", null=True)
     

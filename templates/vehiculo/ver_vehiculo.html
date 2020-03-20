@@ -17,13 +17,13 @@
         <ul class="messages">
            
             <li>
-                <div class="alert alert-warning">Selecciona el nombre de una pelicula para agregar funcion</div>
+                <div class="alert alert-warning">Selecciona un vehiculo para alquilar</div>
             </li>
            
         </ul>
       
     </div>
-    <h1>Peliculas</h1>
+    <h1>Vehiculos</h1>
     <div class="messages" >
         {% if messages %}
         <ul class="messages">
@@ -41,35 +41,33 @@
     <table class="table table-striped" id="tpelicula">
         <thead>
             <tr>
-                <th>Pelicula</th>
-                <th>sinopsis</th>
-                <th>Genero</th>
-                <th>Clasificacion</th>
-                <th>Fecha de lanzamiento</th>
-                <th>Duraciom</th>
-                <th>Director</th>
-                <th>Protagonistas</th>
-                <th>Proyeccion</th>
+                <th>Placa</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Transmision</th>
+                <th>Nro de puertas</th>
+                <th>Numero de asientos</th>
+                <th>Tipo de vehiculo</th>
+                <th>Aire acondicionado</th>
             </tr>
             </thead>
-            {% for c in lista%}
-                <tr>
-                    <th><a href="/cartelera/agregar_horarios?peli={{c.pelicula_id}}">{{c.nombre_pelicula}}</a></th>
-                    <th>{{c.sinopsis}}</th>
-                    <th>{{c.genero}}</th>
-                    <th>{{c.clasificacion}}</th>
-                    <th>{{c.fechaLanzamiento}}</th>
-                    <th>{{c.duracion}}</th>
-                    <th>{{c.director}}</th>
-                    <th>{{c.protagonistas}}</th>
-                    <th>{{c.proyeccion}}</th>
-                 <!----   <th><a href="/editar_pelicula?nombre_pelicula={{c.nombre_pelicula}}">editar</a></th>-->
-                    
-                </tr>
-            
-    
-            {% endfor%}
-    
+            {% for c in l%}
+            <tr>
+                <th><a href="/cartelera/agregar_horarios?peli={{c.pelicula_id}}">{{c.placa}}</a></th>
+                <th>{{c.marca}}</th>
+                <th>{{c.modelo}}</th>
+                <th>{{c.transmision}}</th>
+                <th>{{c.nro_puertas}}</th>
+                <th>{{c.nro_asientos}}</th>
+                <th>{{c.director}}</th>
+                <th>{{c.protagonistas}}</th>
+                <th>{{c.proyeccion}}</th>
+             <!----   <th><a href="/editar_pelicula?nombre_pelicula={{c.nombre_pelicula}}">editar</a></th>-->
+                
+            </tr>
+        
+
+        {% endfor%}
         </table>
 </div>
 {% endblock%}

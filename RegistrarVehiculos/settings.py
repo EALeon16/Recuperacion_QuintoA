@@ -135,6 +135,7 @@ LOGOUT_REDIRECT_URL=reverse_lazy('/')
 
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
