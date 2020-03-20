@@ -54,8 +54,6 @@ class Persona(models.Model):
 
 class Alquiler(models.Model):
     alquiler_id = models.AutoField(primary_key = True)
-    fecha_alquiler =  models.DateField(auto_now = False, auto_now_add = False, null = True)
-
     hora_recogida =  models.TimeField(null=False)
     persona = models.ForeignKey(
         'Persona', 

@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     path('', views.alquiler, name = 'alquiler'),
+    path('getAll/', views.allAlquileres),
     
 ]

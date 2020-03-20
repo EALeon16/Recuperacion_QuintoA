@@ -275,15 +275,19 @@ function toSingle(digit){
               </div>
               -->
               
-              
-               <select class="myS">
+              <label for="">Busque la cedula del usuario(en caso de que este registrado)</label>
+               <select class="myS" name="persona">
+                <option value="">-------Eliga una opcion--------</option>
                 {% for c in p%}
                 <option value="{{c.persona_id}}">{{c.cedula}}</option>
               
                 {% endfor %}
                
                </select>
-                <button type='submit' id="reg" class="btn btn-success" value="submit">Comprar Boleto</button>
+               <label for="">Fecha de Alquiler</label>
+                <label for="">Hora de recogida</label>
+                <input type="time" name="hora_recogida" id="hora_recogida" />
+                <button type='submit' id="reg" class="btn btn-success" value="submit">Alquilar Vehiculo</button>
                 
               
           </form>
