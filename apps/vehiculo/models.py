@@ -48,7 +48,6 @@ class Persona(models.Model):
 	apellidos = models.CharField(max_length=50, null=False)
 	fechaNacimiento =  models.DateField(auto_now = False, auto_now_add = False, null = False)
 	correo = models.EmailField(max_length = 50, null = False)
-	clave = models.CharField(max_length=50, null = True)
 	celular = models.CharField(max_length=13)
 	direccion = models.TextField(max_length=50, default='sin direccion')
 
