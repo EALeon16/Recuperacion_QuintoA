@@ -17,14 +17,14 @@ def principal(request):
 
 def registrarVehiculo(request):
     usuario = request.user#peticion que es procesada x el frmawor agrega el usuario
-    if usuario.groups.filter(name = 'administrativo').exists():
+    if usuario.groups.filter(name = 'administrador').exists():
         formulario = FormularioVehiculo(request.POST, request.FILES)
         if request.method == 'POST':
             if formulario.is_valid():
                 datos = formulario.cleaned_data
                 vehiculo = Vehiculo()
                 vehiculo.placa = datos.get('placa')
-                vehiculo.marco = datos.get('marca')
+                vehiculo.marca = datos.get('marca')
                 vehiculo.modelo = datos.get('modelo')
                 vehiculo.transmision = datos.get('transmision')
                 vehiculo.nro_puertas = datos.get('nro_puertas')
@@ -46,7 +46,7 @@ def registrarVehiculo(request):
         'f': formulario 
     }
 
-    return render(request,'vehiculo/registrar_vehiculo.html', context),usuario.groups.filter(name = 'administrativo').exists() 
+    return render(request,'vehiculo/registrar_vehiculo.html', context)
 
 
 
@@ -69,7 +69,6 @@ def agregarHorario(request):
                 horario = HorarioA()
                 horario.fecha_recogida = datos.get('fecha_recogida')
                 horario.fecha_devolucion = datos.get('fecha_devolucion')
-                horario.hora_recogida = datos.get('hora_recogida')
                 horario.precio_total = datos.get('precio_total')
                 horario.dias = datos.get('dias')
                 horario.vehiculo = Vehiculo.objects.get(vehiculo_id = placaA)

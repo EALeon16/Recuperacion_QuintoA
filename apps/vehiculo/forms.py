@@ -7,7 +7,7 @@ class FormularioVehiculo(forms.ModelForm):
 class FormularioHorario(forms.ModelForm):
     class Meta:
         model = HorarioA
-        fields = ["fecha_recogida", "hora_recogida","fecha_devolucion","dias", "hora_recogida", "precio_total"]        
+        fields = ["fecha_recogida", "fecha_devolucion","dias",  "precio_total"]        
 
 
 
